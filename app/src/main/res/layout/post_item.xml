@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.fristano.redditfeedchallenge.model.Post"/>
+        <import type="com.fristano.redditfeedchallenge.view.ui.FeedListAdapter.IFeedListAdapterAdapterCallback"/>
+
+        <variable
+            name="post"
+            type="com.fristano.redditfeedchallenge.model.Post" />
+
+        <variable
+            name="callback"
+            type="com.fristano.redditfeedchallenge.view.ui.FeedListAdapter.IFeedListAdapterAdapterCallback" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp"
+        android:onClick="@{() -> callback.onClick(post)}"
+        >
+
+        <View
+            android:id="@+id/postItemReadDot"
+            android:layout_width="@dimen/_5sdp"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@drawable/unreaded_dot"
+
+            app:goneIfTrue="@{post.visited}"
+
+            app:layout_constraintBottom_toBottomOf="@+id/postItemAuthor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/postItemAuthor"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <TextView
+            android:id="@+id/postItemAuthor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15sdp"
+            android:text="@{post.author}"
+            tools:text="UserName"
+            android:singleLine="true"
+            android:ellipsize="end"
+
+            app:layout_constraintStart_toEndOf="@+id/postItemReadDot"
+            app:layout_constraintEnd_toStartOf="@+id/postItemTime"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <TextView
+            android:id="@+id/postItemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_16sdp"
+
+
+            android:textSize="@dimen/_11sdp"
+            android:text="@{post.createdTimeText}"
+            tools:text="10 years ago"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/postItemAuthor"
+            app:layout_constraintBottom_toBottomOf="@+id/postItemAuthor"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <ImageView
+            android:id="@+id/postItemAvatar"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginVertical="@dimen/_8sdp"
+
+            app:imageUrl="@{post.thumbnail}"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postItemAuthor"
+
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/postItemTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="@dimen/_8sdp"
+            android:textAlignment="textStart"
+            android:text="@{post.title}"
+            android:textSize="@dimen/_11sdp"
+            android:singleLine="false"
+            app:layout_constraintBottom_toBottomOf="@+id/postItemAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postItemAvatar"
+            app:layout_constraintTop_toTopOf="@+id/postItemAvatar"
+
+            tools:text="Knife made of clable from the golden gate bridge" />
+
+        <Button
+            android:id="@+id/postItemDismissButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> callback.onDismiss(post)}"
+            android:text="@string/dismiss_post"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postItemAvatar"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <TextView
+            android:id="@+id/postItemComments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+
+            app:commentNumberFormat="@{post.numComments}"
+            app:layout_constraintBottom_toBottomOf="@+id/postItemDismissButton"
+            app:layout_constraintTop_toBottomOf="@+id/postItemAvatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postItemDismissButton"
+            tools:text="1448 comments"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

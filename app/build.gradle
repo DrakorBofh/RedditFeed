@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.fristano.redditfeedchallenge"
+        versionCode 1
+        versionName "1.0"
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        multiDexEnabled true
+
+        renderscriptTargetApi 18
+        renderscriptSupportModeEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+ext.versions = rootProject.ext.ver
+
+dependencies {
+
+    //------ Main
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+
+    implementation "androidx.legacy:legacy-support-v4:${versions.x_legacy}"
+
+    //------ Unit Tests
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.x_junit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso_core}"
+
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:${versions.coroutines}"
+
+    testImplementation "androidx.room:room-testing:${versions.room}"
+
+    //------- Android x
+    implementation "androidx.multidex:multidex:${versions.x_multidex}"
+    implementation "androidx.core:core-ktx:${versions.x_ktx}"
+    implementation "androidx.appcompat:appcompat:${versions.x_appcompat}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.x_lifecycle}"
+
+    //-------- UI
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.x_constraintlayout}"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.nav}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.nav}"
+
+    //----- Picasso ImageLoader
+    implementation "com.squareup.picasso:picasso:${versions.picasso}"
+
+    //---- Responsive dimensions
+    implementation "com.intuit.sdp:sdp-android:${versions.spd}"
+    implementation "com.intuit.ssp:ssp-android:${versions.ssd}"
+
+    //------- Networking and data model
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-scalars:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp3_interceptor}"
+    implementation "com.squareup.okhttp:okhttp:${versions.okhttp}"
+    implementation "com.google.code.gson:gson:${versions.gson}"
+
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+    implementation 'com.github.mrmike:ok2curl:0.5.0'
+
+}

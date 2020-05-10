@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.fristano.redditfeedchallenge.viewmodel.FeedViewModel"/>
+        <variable
+            name="viewModel"
+            type="com.fristano.redditfeedchallenge.viewmodel.FeedViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.slidingpanelayout.widget.SlidingPaneLayout
+            android:id="@+id/frgFeedSlidingPane"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/frgFeedLeftPane"
+                android:name="com.fristano.redditfeedchallenge.view.ui.FragmentFeedList"
+                android:layout_width="@dimen/_300sdp"
+                android:layout_height="match_parent"
+                android:paddingEnd="@dimen/_8sdp"
+                android:layout_gravity="start"
+                tools:layout="@layout/fragment_feed_list"
+                tools:ignore="RtlSymmetry" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/frgFeedRightPane"
+                android:name="com.fristano.redditfeedchallenge.view.ui.FragmentFeedDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                tools:layout="@layout/fragment_feed_detail" />
+
+        </androidx.slidingpanelayout.widget.SlidingPaneLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

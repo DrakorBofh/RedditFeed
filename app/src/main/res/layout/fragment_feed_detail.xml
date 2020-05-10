@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.fristano.redditfeedchallenge.model.Post"/>
+
+        <variable
+            name="post"
+            type="com.fristano.redditfeedchallenge.model.Post" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:padding="@dimen/_8sdp"
+        >
+
+        <TextView
+            android:id="@+id/postDetailAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15sdp"
+            android:text="@{post.author}"
+            tools:text="UserName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/postDetailImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+
+            app:imageUrl="@{post.thumbnail}"
+            app:goneIfNull="@{post.thumbnail}"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postDetailAuthor"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/postDetailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@{post.title}"
+            android:textSize="@dimen/_15sdp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postDetailImage"
+            tools:text="Content" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

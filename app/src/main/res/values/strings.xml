@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Reddit Feed Challenge</string>
+    <string name="dismiss_post">Dismiss Post</string>
+    <string name="comments">comments</string>
+    <string name="header_count">%s items / %s unread</string>
+    <string name="remove_all">Remove all</string>
+</resources>
